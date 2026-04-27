@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Sports Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>body { background-color: #0a0f1a; color: white; font-family: sans-serif; }</style>
+</head>
+<body class="p-4 pb-20">
+    <div class="grid grid-cols-3 gap-3 mb-6">
+        <div class="bg-[#161b2c] p-3 rounded-2xl border border-white/5 text-center">
+            <p class="text-[10px] text-gray-400 font-bold uppercase">Season</p>
+            <p class="text-lg font-black text-blue-400">#137747</p>
+        </div>
+        <div class="bg-[#161b2c] p-3 rounded-2xl border border-white/5 text-center">
+            <p class="text-[10px] text-gray-400 font-bold uppercase">Round</p>
+            <p class="text-lg font-black text-green-400">32</p>
+        </div>
+        <div class="bg-[#161b2c] p-3 rounded-2xl border border-white/5 text-center">
+            <p class="text-[10px] text-gray-400 font-bold uppercase">Round ID</p>
+            <p class="text-lg font-black text-yellow-400">1362180</p>
+        </div>
+    </div>
+    <div class="flex gap-2 overflow-x-auto pb-6">
+        <button class="bg-blue-600 px-6 py-2 rounded-full text-xs font-bold">1X2</button>
+        <button class="bg-[#1e263d] px-6 py-2 rounded-full text-xs font-bold text-gray-400">Over/Under</button>
+        <button class="bg-[#1e263d] px-6 py-2 rounded-full text-xs font-bold text-gray-400">BTTS</button>
+    </div>
+    <div class="space-y-4">
+        <div class="bg-blue-600 rounded-xl p-4 flex justify-between items-center">
+            <div class="flex items-center gap-3"><i class="fas fa-futbol"></i> <span class="font-bold">English League</span></div>
+            <span class="text-xs">10 matches, 0 accessible <i class="fas fa-chevron-down ml-2"></i></span>
+        </div>
+        <div class="bg-red-600 rounded-xl p-4 flex justify-between items-center">
+            <div class="flex items-center gap-3"><i class="fas fa-bullseye"></i> <span class="font-bold">Spanish League</span></div>
+            <span class="text-xs">10 matches, 0 accessible <i class="fas fa-chevron-down ml-2"></i></span>
+        </div>
+        <div class="bg-green-600 rounded-xl p-4 flex justify-between items-center">
+            <div class="flex items-center gap-3"><i class="fas fa-flag"></i> <span class="font-bold">Italian League</span></div>
+            <span class="text-xs">10 matches, 0 accessible <i class="fas fa-chevron-down ml-2"></i></span>
+        </div>
+    </div>
+</body>
+</html>
+
