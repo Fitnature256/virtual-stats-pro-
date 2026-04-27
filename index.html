@@ -13,6 +13,7 @@
         .league-card:active { transform: scale(0.98); }
         .details-panel { display: none; background: #1e263d; border-radius: 0 0 12px 12px; margin-top: -8px; }
     </style>
+    <script type="module" src="/main.js"></script>
 </head>
 <body class="p-4 pb-24">
 
@@ -72,37 +73,5 @@
         <i class="fas fa-chart-simple text-gray-500 text-lg"></i>
         <i class="fas fa-user text-gray-500 text-lg"></i>
     </div>
-
-    <script>
-        // 1. DYNAMIC COUNTER LOGIC
-        // This makes the Round ID change every 5 seconds to look "Live"
-        setInterval(() => {
-            let roundNum = parseInt(document.getElementById('round-val').innerText);
-            document.getElementById('round-val').innerText = roundNum + 1;
-            
-            // Randomly update "accessible" matches to simulate analysis
-            const randomCount = Math.floor(Math.random() * 4);
-            document.getElementById('eng-count').innerText = randomCount + " accessible";
-        }, 10000);
-
-        // 2. TOGGLE ACCORDION LOGIC
-        // This makes the league bars open and close when clicked
-        function toggleLeague(id) {
-            const panel = document.getElementById('details-' + id);
-            const isVisible = panel.style.display === 'block';
-            
-            // Close all first
-            document.querySelectorAll('.details-panel').forEach(p => p.style.display = 'none');
-            
-            // Toggle the clicked one
-            panel.style.display = isVisible ? 'none' : 'block';
-        }
-
-        // 3. MARKET SWITCHER
-        function switchMarket(market) {
-            alert("Switching analysis to: " + market);
-            // In a real app, this would refresh the data for that specific market
-        }
-    </script>
 </body>
 </html>
