@@ -3,45 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Sports Analytics</title>
+    <title>Virtual Sports Analytics Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>body { background-color: #0a0f1a; color: white; font-family: sans-serif; }</style>
+    <style>
+        body { background-color: #0a0f1a; color: white; font-family: sans-serif; overflow-x: hidden; }
+        .league-card { transition: all 0.3s ease; cursor: pointer; }
+        .league-card:active { transform: scale(0.98); }
+        .details-panel { display: none; background: #1e263d; border-radius: 0 0 12px 12px; margin-top: -8px; }
+    </style>
 </head>
-<body class="p-4 pb-20">
+<body class="p-4 pb-24">
+
     <div class="grid grid-cols-3 gap-3 mb-6">
         <div class="bg-[#161b2c] p-3 rounded-2xl border border-white/5 text-center">
             <p class="text-[10px] text-gray-400 font-bold uppercase">Season</p>
-            <p class="text-lg font-black text-blue-400">#137747</p>
+            <p id="season-val" class="text-lg font-black text-blue-400 tracking-tighter">4829</p>
         </div>
         <div class="bg-[#161b2c] p-3 rounded-2xl border border-white/5 text-center">
             <p class="text-[10px] text-gray-400 font-bold uppercase">Round</p>
-            <p class="text-lg font-black text-green-400">32</p>
+            <p id="round-val" class="text-lg font-black text-green-400 tracking-tighter">14</p>
         </div>
         <div class="bg-[#161b2c] p-3 rounded-2xl border border-white/5 text-center">
             <p class="text-[10px] text-gray-400 font-bold uppercase">Round ID</p>
-            <p class="text-lg font-black text-yellow-400">1362180</p>
+            <p id="id-val" class="text-lg font-black text-yellow-400 tracking-tighter">#VS82</p>
         </div>
     </div>
-    <div class="flex gap-2 overflow-x-auto pb-6">
-        <button class="bg-blue-600 px-6 py-2 rounded-full text-xs font-bold">1X2</button>
-        <button class="bg-[#1e263d] px-6 py-2 rounded-full text-xs font-bold text-gray-400">Over/Under</button>
-        <button class="bg-[#1e263d] px-6 py-2 rounded-full text-xs font-bold text-gray-400">BTTS</button>
+
+    <div class="flex gap-2 overflow-x-auto pb-6 no-scrollbar">
+        <button onclick="switchMarket('1X2')" class="market-btn bg-blue-600 px-6 py-2 rounded-full text-xs font-bold whitespace-nowrap">1X2</button>
+        <button onclick="switchMarket('O/U')" class="market-btn bg-[#1e263d] px-6 py-2 rounded-full text-xs font-bold text-gray-400 whitespace-nowrap">Over/Under</button>
+        <button onclick="switchMarket('BTTS')" class="market-btn bg-[#1e263d] px-6 py-2 rounded-full text-xs font-bold text-gray-400 whitespace-nowrap">BTTS</button>
     </div>
-    <div class="space-y-4">
-        <div class="bg-blue-600 rounded-xl p-4 flex justify-between items-center">
-            <div class="flex items-center gap-3"><i class="fas fa-futbol"></i> <span class="font-bold">English League</span></div>
-            <span class="text-xs">10 matches, 0 accessible <i class="fas fa-chevron-down ml-2"></i></span>
+
+    <div id="league-container" class="space-y-4">
+        <div onclick="toggleLeague('england')" class="league-card bg-[#161b2c] rounded-2xl p-4 flex justify-between items-center border border-white/5 shadow-lg">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg"><i class="fas fa-futbol"></i></div>
+                <div>
+                    <h3 class="font-black text-sm">English League</h3>
+                    <p class="text-[10px] text-gray-500">10 matches, <span class="text-blue-400" id="eng-count">0 accessible</span></p>
+                </div>
+            </div>
+            <i class="fas fa-chevron-down text-gray-600"></i>
         </div>
-        <div class="bg-red-600 rounded-xl p-4 flex justify-between items-center">
-            <div class="flex items-center gap-3"><i class="fas fa-bullseye"></i> <span class="font-bold">Spanish League</span></div>
-            <span class="text-xs">10 matches, 0 accessible <i class="fas fa-chevron-down ml-2"></i></span>
+        <div id="details-england" class="details-panel p-4 text-xs text-gray-400">
+            Scanning current round for high-probability patterns...
         </div>
-        <div class="bg-green-600 rounded-xl p-4 flex justify-between items-center">
-            <div class="flex items-center gap-3"><i class="fas fa-flag"></i> <span class="font-bold">Italian League</span></div>
-            <span class="text-xs">10 matches, 0 accessible <i class="fas fa-chevron-down ml-2"></i></span>
+
+        <div onclick="toggleLeague('spain')" class="league-card bg-[#161b2c] rounded-2xl p-4 flex justify-between items-center border border-white/5 shadow-lg">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-yellow-500 rounded-xl flex items-center justify-center shadow-lg text-black"><i class="fas fa-shield-halved"></i></div>
+                <div>
+                    <h3 class="font-black text-sm text-yellow-500">Spanish League</h3>
+                    <p class="text-[10px] text-gray-500">10 matches, <span class="text-yellow-500">0 accessible</span></p>
+                </div>
+            </div>
+            <i class="fas fa-chevron-down text-gray-600"></i>
+        </div>
+        <div id="details-spain" class="details-panel p-4 text-xs text-gray-400">
+            Waiting for Round #33 to begin analysis...
         </div>
     </div>
+
+    <div class="fixed bottom-0 left-0 w-full bg-[#161b2c]/90 backdrop-blur-md p-4 border-t border-white/5 flex justify-around items-center">
+        <i class="fas fa-home text-blue-500 text-lg"></i>
+        <i class="fas fa-chart-simple text-gray-500 text-lg"></i>
+        <i class="fas fa-user text-gray-500 text-lg"></i>
+    </div>
+
+    <script>
+        // 1. DYNAMIC COUNTER LOGIC
+        // This makes the Round ID change every 5 seconds to look "Live"
+        setInterval(() => {
+            let roundNum = parseInt(document.getElementById('round-val').innerText);
+            document.getElementById('round-val').innerText = roundNum + 1;
+            
+            // Randomly update "accessible" matches to simulate analysis
+            const randomCount = Math.floor(Math.random() * 4);
+            document.getElementById('eng-count').innerText = randomCount + " accessible";
+        }, 10000);
+
+        // 2. TOGGLE ACCORDION LOGIC
+        // This makes the league bars open and close when clicked
+        function toggleLeague(id) {
+            const panel = document.getElementById('details-' + id);
+            const isVisible = panel.style.display === 'block';
+            
+            // Close all first
+            document.querySelectorAll('.details-panel').forEach(p => p.style.display = 'none');
+            
+            // Toggle the clicked one
+            panel.style.display = isVisible ? 'none' : 'block';
+        }
+
+        // 3. MARKET SWITCHER
+        function switchMarket(market) {
+            alert("Switching analysis to: " + market);
+            // In a real app, this would refresh the data for that specific market
+        }
+    </script>
 </body>
 </html>
+
 
