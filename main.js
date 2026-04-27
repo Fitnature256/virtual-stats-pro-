@@ -1,7 +1,11 @@
 import { injectSpeedInsights } from '@vercel/speed-insights';
+import { inject } from '@vercel/analytics';
 
 // Initialize Vercel Speed Insights
 injectSpeedInsights();
+
+// Initialize Vercel Web Analytics
+inject();
 
 // Existing application logic
 // 1. DYNAMIC COUNTER LOGIC
